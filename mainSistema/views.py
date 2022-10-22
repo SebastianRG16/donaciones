@@ -29,6 +29,10 @@ def tareas(request):
     return render(request, 'tareas.html')
 
 
+def registro(request):
+    return render(request, 'registro.html')
+
+
 def salir(request):
     logout(request)
     return redirect('ingresar')
