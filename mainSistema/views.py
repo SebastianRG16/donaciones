@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def ingresar(request):
@@ -25,14 +26,15 @@ def ingresar(request):
             login(request, user)
             return redirect('tareas')
 
+@login_required
 def tareas(request):
     return render(request, 'tareas.html')
 
-
+@login_required
 def registro(request):
     return render(request, 'registro.html')
 
-
+@login_required
 def salir(request):
     logout(request)
     return redirect('ingresar')
