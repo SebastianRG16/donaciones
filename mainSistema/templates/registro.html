@@ -33,7 +33,8 @@
                 <thead>
                   <tr class="text-center">
                     <th scope="col">#</th>
-                    <th scope="col">Nombre y apellido</th>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Apellidos</th>
                     <th scope="col">Cedula</th>
                     <th scope="col">Contacto</th>
                     <th scope="col">Correo electronico</th>
@@ -42,17 +43,31 @@
                   </tr>
                 </thead>
                 <tbody>
+                  {% for Asistente in mostrarRegistros %}
                   <tr>
-                    <th scope="row">1</th>
-                    <td>inf</td>
-                    <td>inf</td>
-                    <td>inf</td>
-                    <td>inf</td>
-                    <td>inf</td>
-                    <td>inf</td>
+                    <td>{{Asistente.idAsistente}}</td>
+                    <td>{{Asistente.nombres}}</td>
+                    <td>{{Asistente.apellidos}}</td>
+                    <td>{{Asistente.documento}}</td>
+                    <td>{{Asistente.telefono}}</td>
+                    <td>{{Asistente.correo}}</td>
+                    <td>{{Asistente.tipo_aporte}}</td>
+                    <td>{{Asistente.tipo_persona}}</td>
                   </tr>
+                  {% endfor %}
                 </tbody>
               </table>
+              <script>
+                function abrir_modal(url){
+                    $('#modal-ejemplo').load(url, function(){
+                        $(this).modal('show'); 
+                    })                
+                }
+        
+                $(document).ready( function () {
+                    $('#tabla').DataTable();
+                } );
+            </script> 
           </div>
         </div>
       </div>

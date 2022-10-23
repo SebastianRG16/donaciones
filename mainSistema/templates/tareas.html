@@ -9,9 +9,14 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
   <title>Informacion</title>
+
+  
 </head>
 
+
 <body>
+<form action="{% url 'save' %}" method="POST">
+{% csrf_token %}
   <div class="container w-75 bg-white mt-5 rounded">
   <section class="vh-100 gradient-custom rounded shadow">
     <div class="container-fluid ps-md-0 rounded">
@@ -31,20 +36,24 @@
             <h3 class="login-heading mb-4 text-center text-light fw-bold mb-2">REGISTRAR INFORMACION</h3>
             <form>
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="nombre" placeholder="name">
-                <label for="floatingname">Nombre y apellido</label>
+                <input type="text" class="form-control" id="nombre" placeholder="nombres" name="nombres">
+                <label for="floatingnombres">Nombres</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="cedula" placeholder="cedula">
-                <label for="floatingcedula">Cedula</label>
+                <input type="text" class="form-control" id="nombres" placeholder="name" name="apellidos">
+                <label for="floatingname">Apellidos</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="contanto" placeholder="contanto">
-                <label for="floatingcontacto">Contanto</label>
+                <input type="text" class="form-control" id="documento" placeholder="name" name="documento">
+                <label for="floatingname">Cedula</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="contacto" placeholder="name" name="telefono">
+                <label for="floatingname">Contacto</label>
               </div>
               <div class="form-floating mb-4">
-                <input type="text" class="form-control" id="correo" placeholder="correo">
-                <label for="floatingcorre">Correo electronico</label>
+                <input type="text" class="form-control" id="correo" placeholder="name" name="correo">
+                <label for="floatingname">Correo electronico</label>
               </div>
               <div class="mb-4 col-12 col-md-12 col-lg-12 col-xl-12 ">
                 <div class="row align-items-center">
@@ -52,13 +61,13 @@
                     Tu aporte volutario:
                   </div>
                   <div class="col-3 col-md-3 col-lg-3 col-xl-3 text-light">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                      value="option1">
+                    <input class="form-check-input" type="radio"  name="tipo_aporte" id="inlineRadio1" 
+                      value="urna">
                     <label class="form-check-label" for="inlineRadio1">urna</label>
                   </div>
                   <div class="col-4 col-md-4 col-lg-4 col-xl-4 text-light">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                      value="option2">
+                    <input class="form-check-input" type="radio"  name="tipo_aporte" id="inlineRadio2" 
+                      value="electronico">
                     <label class="form-check-label" for="inlineRadio2">electronico</label>
                   </div>
                 </div>
@@ -66,30 +75,29 @@
               <div class="mb-3 col-12 col-md-12 col-lg-12 col-xl-12 ">
                 <div class="row align-items-center">
                   <div class="col-auto text-light">
-                    <input class="form-check-input" type="radio" name="inlineRadioOption" id="inlineRadio2"
-                      value="option2">
-                    <label class="form-check-label" for="inlineRadio2">Asistente</label>
+                    <input class="form-check-input" type="radio"  name="tipo_persona" id="inlineRadio3" name="tipo_persona_1"
+                      value="Asistente">
+                    <label class="form-check-label" for="inlineRadio3">Asistente</label>
                   </div>
                 </div>
               </div>
               <div class="mb-3 col-12 col-md-12 col-lg-12 col-xl-12 text-light">
                 <div class="row align-items-center">
                   <div class="col-auto ">
-                    <input class="form-check-input" type="radio" name="inlineRadioOption" id="inlineRadio2"
-                      value="option2">
-                    <label class="form-check-label" for="inlineRadio2">Invitado especial</label>
+                    <input class="form-check-input" type="radio" name="tipo_persona" id="inlineRadio4" name="cargo" name="tipo_persona_2"
+                      value="Inivitada especial">
+                    <label class="form-check-label" for="inlineRadio4">Invitado especial</label>
                   </div>
                 </div>
               </div>
-              <div class="text-center">
-                <a href="{% url 'tareas' %}" type="button" class="btn btn-success btn-lg">REGISTRAR</a>
-              </div>
+              <button type="sumbit" class="btn btn-primary">Guardar</button>
             </form>
           </div>
         </div>
       </div>
     </div>
   </section>
+</form>
 </div>
 <style>
   .gradient-custom {

@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from mainSistema import views
+from django.http import HttpResponse, JsonResponse
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +25,6 @@ urlpatterns = [
     path('ingresar/', views.ingresar, name='ingresar'),
     path('salir/', views.salir, name='salir'),
     path('registro/', views.registro, name='registro'),
+    path('save/', views.save_tareas, name="save"),
+   
 ]

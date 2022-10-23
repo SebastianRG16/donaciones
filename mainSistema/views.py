@@ -7,6 +7,9 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from .models import Asistente
+
+# from mainSistema.models import Asistente
 # Create your views here.
 
 def ingresar(request):
@@ -32,12 +35,52 @@ def tareas(request):
 
 @login_required
 def registro(request):
-    return render(request, 'registro.html')
+    datosRegistros = Asistente.objects.all().values('idAsistente', 'nombres', 'apellidos', 'documento', 'telefono', 'correo', 'tipo_aporte', 'tipo_persona')
+    return render(request,"registro.html",{   
+        'mostrarRegistros' : datosRegistros,
+})
 
 @login_required
 def salir(request):
     logout(request)
     return redirect('ingresar')
+
+def save_tareas(request):
+    
+    if request.method == 'POST':
+        nombres = request.POST["nombres"]
+        apellidos = request.POST["apellidos"]
+        documento = request.POST["documento"]
+        telefono = request.POST["telefono"]
+        correo = request.POST["correo"]
+        tipo_aporte = request.POST["tipo_aporte"]
+        tipo_persona = request.POST["tipo_persona"]
+        
+
+
+
+        Asis = Asistente(
+
+            nombres = nombres,
+            apellidos = apellidos,
+            documento = documento,
+            telefono = telefono,
+            correo = correo,
+            tipo_aporte = tipo_aporte,
+            tipo_persona = tipo_persona
+
+
+        )
+        Asis.save()
+
+        return redirect("tareas")
+    
+    else:
+        return redirect("registro")
+
+
+
+
 
 #  .\venv\Scripts\activate
 
