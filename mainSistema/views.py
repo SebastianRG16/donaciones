@@ -45,6 +45,7 @@ def salir(request):
     logout(request)
     return redirect('ingresar')
 
+@login_required
 def save_tareas(request):
     
     if request.method == 'POST':
