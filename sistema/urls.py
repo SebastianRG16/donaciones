@@ -20,12 +20,11 @@ from django.http import HttpResponse, JsonResponse
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.ingresar, name='ingresar'),
     path('tareas/', views.tareas, name='tareas'),
     path('ingresar/', views.ingresar, name='ingresar'),
     path('salir/', views.salir, name='salir'),
     path('registro/', views.registro, name='registro'),
     path('save/', views.save_tareas, name="save"),
-    path('preRegistro/', views.preRegistro, name="preRegistro"),
+    path('', views.preRegistro, name="preRegistro"),
    
 ]

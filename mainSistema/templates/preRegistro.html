@@ -21,18 +21,15 @@
     <div class="container-fluid ps-md-0 rounded">
       <div class="login d-flex align-items-center ">
         <div class="container col-12 col-md-6 col-lg-6 col-xl-6 col-auto mx-auto">
-          <div class=" mx-auto">
+          <div class=" mx-auto py-3">
             <nav class="navbar fixed-top justify-content-end" style="background-color: #343531">
                 <ul class="nav justify-content-end">
                   <li class="nav-item">
-                    <a class="nav-link text-light" href="{% url 'registro' %}">Informacion registrada</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-light" href="{% url 'salir' %}">Salir</a>
+                    <a class="nav-link text-light" href="{% url 'ingresar' %}">Login</a>
                   </li>
                 </ul>
             </nav>
-            <h3 class="login-heading mb-4 text-center text-light fw-bold mb-2">REGISTRAR INFORMACION</h3>
+            <h3 class="login-heading mb-4 text-center text-light fw-bold mb-2">HACER PRE REGISTRO</h3>
             <form>
               <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="nombre" placeholder="nombres" name="nombres">
@@ -55,7 +52,7 @@
                 <label for="floatingcorreo">Correo electronico</label>
               </div>
               <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="sumbit" class="btn btn-success text-center">Guardar</button>
+                <button type="sumbit" class="btn btn-success text-center">Generar codigo QR</button>
               </div>
             </form>
           </div>
