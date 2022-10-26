@@ -47,7 +47,10 @@ def salir(request):
 
 
 def preRegistro(request):
-    return render(request, 'preRegistro.html')
+    datospreRegistro = Asistente.objects.all().values('idAsistente', 'nombres', 'apellidos', 'documento', 'telefono', 'correo')
+    return render(request, 'preRegistro.html',{
+       'mostrarpreRegistro' : datospreRegistro, 
+    })
 
 @login_required
 def save_tareas(request):
@@ -83,6 +86,33 @@ def save_tareas(request):
     else:
         return redirect("registro")
 
+
+def save_preRegistro(request):
+
+    if request.method == 'POST':
+        nombres = request.POST["nombres"]
+        apellidos = request.POST["apellidos"]
+        documento = request.POST["documento"]
+        telefono = request.POST["telefono"]
+        correo = request.POST["correo"]
+        
+
+
+
+        Asis = Asistente(
+
+            nombres = nombres,
+            apellidos = apellidos,
+            documento = documento,
+            telefono = telefono,
+            correo = correo,
+        )
+        Asis.save()
+
+        return redirect("ingresar")
+    
+    else:
+        return redirect("preRegistro")
 
 
 
