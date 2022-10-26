@@ -45,6 +45,10 @@ def salir(request):
     logout(request)
     return redirect('ingresar')
 
+
+def preRegistro(request):
+    return render(request, 'preRegistro.html')
+
 @login_required
 def save_tareas(request):
     
