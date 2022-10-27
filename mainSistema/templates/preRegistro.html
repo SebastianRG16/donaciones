@@ -31,28 +31,33 @@
             </nav>
             <h3 class="login-heading mb-4 text-center text-light fw-bold mb-2">HACER PRE REGISTRO</h3>
             <form>
-              <div class="form-floating mb-3">
+              <div class="form-floating mb-4">
                 <input type="text" class="form-control" id="nombre" placeholder="nombres" name="nombres">
                 <label for="floatingnombres">Nombres</label>
               </div>
-              <div class="form-floating mb-3">
+              <div class="form-floating mb-4">
                 <input type="text" class="form-control" id="nombres" placeholder="apellidos" name="apellidos">
                 <label for="floatingapellidos">Apellidos</label>
               </div>
-              <div class="form-floating mb-3">
+              <div class="form-floating mb-4">
                 <input type="text" class="form-control" id="documento" placeholder="documento" name="documento">
                 <label for="floatingdocumento">Cedula</label>
               </div>
-              <div class="form-floating mb-3">
+              <div class="form-floating mb-4">
                 <input type="text" class="form-control" id="contacto" placeholder="telefono" name="telefono">
                 <label for="floatingtelefono">Contacto</label>
               </div>
-              <div class="form-floating mb-4">
+              <div class="form-floating mb-5">
                 <input type="text" class="form-control" id="correo" placeholder="correo" name="correo">
                 <label for="floatingcorreo">Correo electronico</label>
               </div>
-              <div class="d-grid gap-2 col-6 mx-auto">
+              <div class="d-grid gap-2 col-6 mx-auto mb-5 ">
                 <button type="sumbit" class="btn btn-success text-center">Generar codigo QR</button>
+              </div>
+              <div class="input-group mb-3">
+                <div style="margin: auto">
+                  {{ svg|safe }}
+                </div>
               </div>
             </form>
           </div>

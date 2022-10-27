@@ -8,6 +8,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from .models import Asistente
+import qrcode
+import qrcode.image.svg
+from io import BytesIO
 
 # from mainSistema.models import Asistente
 # Create your views here.
@@ -48,6 +51,7 @@ def salir(request):
 
 def preRegistro(request):
     datospreRegistro = Asistente.objects.all().values('idAsistente', 'nombres', 'apellidos', 'documento', 'telefono', 'correo')
+    
     return render(request, 'preRegistro.html',{
        'mostrarpreRegistro' : datospreRegistro, 
     })
@@ -109,13 +113,16 @@ def save_preRegistro(request):
         )
         Asis.save()
 
-        return redirect("ingresar")
-    
-    else:
-        return redirect("preRegistro")
 
+        context = {}
+    if request.method == "POST":
+        factory = qrcode.image.svg.SvgImage
+        img = qrcode.make(request.POST.get("documento",""), image_factory=factory, box_size=20)
+        stream = BytesIO()
+        img.save(stream)
+        context["svg"] = stream.getvalue().decode()
 
-
+    return render(request, "preRegistro.html", context=context)
 
 #  .\venv\Scripts\activate
 
