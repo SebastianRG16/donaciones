@@ -154,7 +154,7 @@ def leerqr(request):
     datosRegistros = Asistente.objects.get(documento = qrDocumento)
     
 
-    return render(request, 'tareas.html', {
+    return render(request, 'autoInfo.html', {
         'mostraDocumento' : qrDocumento,
         'validoDocumento' : datosRegistros, 
     })
