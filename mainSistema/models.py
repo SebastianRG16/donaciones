@@ -19,7 +19,19 @@ class Asistente(models.Model):
     def __str__(self) -> str:
         return f"{self.nombres} - {self.tipo_persona}"
     
-    
+class Preregistro(models.Model):
+    nombres = models.CharField(max_length=100, verbose_name="Nombres")
+    apellidos = models.CharField(max_length=100, verbose_name="Apellidos")
+    documento = models.CharField(max_length=100, verbose_name="Documento")
+    telefono = models.CharField(max_length=10, verbose_name="telefono")
+    correo = models.CharField(max_length=50, verbose_name="correo")
+
+    class Meta:
+        verbose_name = "Preregistro"
+        verbose_name_plural = "Preregistro"
+
+    def __str__(self) -> str:
+        return f"{self.nombres} - {self.documento}"
 
 class Donacion(models.Model):
     idDonacion = models.AutoField(primary_key=True)

@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .models import Asistente
+from .models import Asistente, Preregistro
 import qrcode
 import qrcode.image.svg
 from io import BytesIO
@@ -105,7 +105,7 @@ def save_preRegistro(request):
 
 
 
-        Asis = Asistente(
+        Asis = Preregistro(
 
             nombres = nombres,
             apellidos = apellidos,
