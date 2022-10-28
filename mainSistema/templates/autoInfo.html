@@ -40,14 +40,13 @@
                 <input type="text" class="form-control" id="nombre" placeholder="nombres" name="nombres" required
                 value="{{validoDocumento.nombres}}">
                 <label for="floatingnombres">{{validoDocumento.nombres}}</label>
-                {% else %}
-                <input type="text" class="form-control" id="nombre" placeholder="nombres" name="nombres" required>
-                <label for="floatingnombres">Nombres</label>
                 {% endif %}
               </div>
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="nombres" placeholder="apellidos" name="apellidos" required>
-                <label for="floatingapellidos">Apellidos</label>
+                  {% if  %}
+                  <input type="text" class="form-control" id="nombres" placeholder="apellidos" name="apellidos" required>
+                  <label for="floatingapellidos">Apellidos</label>
+                  {% endif %}
               </div>
               <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="documento" placeholder="documento" name="documento" required>
