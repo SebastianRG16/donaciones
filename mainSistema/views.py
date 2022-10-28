@@ -147,8 +147,17 @@ def leerqr(request):
     capture.release()
     cv2.destroyAllWindows
 
+    qrDocumento = data
 
-    return render(request, 'tareas.html')
+    print({qrDocumento})
+
+    datosRegistros = Asistente.objects.get(documento = qrDocumento)
+    
+
+    return render(request, 'tareas.html', {
+        'mostraDocumento' : qrDocumento,
+        'validoDocumento' : datosRegistros, 
+    })
 
 #  .\venv\Scripts\activate
 

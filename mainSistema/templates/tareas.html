@@ -39,8 +39,14 @@
             <h3 class="login-heading mb-4 text-center text-light fw-bold mb-2">REGISTRAR INFORMACION</h3>
             <form>
               <div class="form-floating mb-3">
+                {% if mostraDocumento == validoDocumento.documento %}
+                <input type="text" class="form-control" id="nombre" placeholder="nombres" name="nombres" required
+                value="{{validoDocumento.nombres}}">
+                <label for="floatingnombres">{{validoDocumento.nombres}}</label>
+                {% else %}
                 <input type="text" class="form-control" id="nombre" placeholder="nombres" name="nombres" required>
                 <label for="floatingnombres">Nombres</label>
+                {% endif %}
               </div>
               <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="nombres" placeholder="apellidos" name="apellidos" required>
