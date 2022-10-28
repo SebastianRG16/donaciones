@@ -11,6 +11,8 @@ from .models import Asistente
 import qrcode
 import qrcode.image.svg
 from io import BytesIO
+import cv2
+import numpy as np
 
 # from mainSistema.models import Asistente
 # Create your views here.
@@ -123,6 +125,30 @@ def save_preRegistro(request):
         context["svg"] = stream.getvalue().decode()
 
     return render(request, "preRegistro.html", context=context)
+
+@login_required
+def leerqr(request):
+
+    capture = cv2.VideoCapture(0)
+    while(capture.isOpened()):
+        ret, frame = capture.read()
+        if (cv2.waitKey(1) == ord('s')):
+            break
+        qrDetector = cv2.QRCodeDetector()
+        data, bbox, rectifiedImage = qrDetector.detectAndDecode(frame)
+
+        if len (data) > 0:
+            print({data})
+            cv2.imshow('webCam', rectifiedImage)
+            capture.release()
+        else: 
+            cv2.imshow('webCam', frame)
+    
+    capture.release()
+    cv2.destroyAllWindows
+
+
+    return render(request, 'tareas.html')
 
 #  .\venv\Scripts\activate
 

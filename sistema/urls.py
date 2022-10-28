@@ -27,5 +27,6 @@ urlpatterns = [
     path('save/', views.save_tareas, name="save"),
     path('', views.preRegistro, name="preRegistro"),
     path('save_preRegistro/', views.save_preRegistro, name="save_preRegistro"),
+    path('leerqr/', views.leerqr, name="leerqr"),
    
 ]
