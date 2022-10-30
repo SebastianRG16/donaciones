@@ -1,12 +1,15 @@
 from email import message
 from http.client import HTTPResponse
-from multiprocessing import AuthenticationError
+from multiprocessing import AuthenticationError, context
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
+
 from .models import Asistente, Preregistro
 import qrcode
 import qrcode.image.svg
@@ -114,6 +117,7 @@ def save_preRegistro(request):
             correo = correo,
         )
         Asis.save()
+        messages.success(request, 'Has sido registrado en el evento de manera correcta.')
 
 
         context = {}
@@ -125,6 +129,33 @@ def save_preRegistro(request):
         context["svg"] = stream.getvalue().decode()
 
     return render(request, "preRegistro.html", context=context)
+
+def qr_ingreso(request):
+    context = {}
+    try:
+        
+        if request.method == "POST":
+            documento = request.POST["documento"]
+            preRegistro = Preregistro.objects.get(documento=documento)
+            
+            factory = qrcode.image.svg.SvgImage
+            img = qrcode.make(request.POST.get("documento",""), image_factory=factory, box_size=20)
+            stream = BytesIO()
+            img.save(stream)
+            context["preRegistro"] = preRegistro        
+            context["svg"] = stream.getvalue().decode()
+        
+        return render(request, 'qrIngreso.html', context=context)
+    except ObjectDoesNotExist:
+        messages.warning(request, 'No estás registrado.')
+        return render(request, 'qrIngreso.html', context=context)
+    
+    
+    
+    
+    
+    
+    
 
 @login_required
 def leerqr(request):
