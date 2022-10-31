@@ -119,15 +119,16 @@ def save_preRegistro(request):
             telefono = telefono,
             correo = correo,
         )
-        Asis.save()
-    
+
+
+
     try:
-        Asistente.objects.filter(documento = Asis.documento)
+        guardar = Asis.documento
+        datosRegistros = Asistente.objects.get(documento = guardar)
+        print(datosRegistros.documento)
         messages.warning(request, 'El asistente ya existe')
     except:
         messages.success(request, 'Se guardo correctamente')
-
-
 
 
     context = {}
@@ -164,14 +165,14 @@ def leerqr(request):
 
     qrDocumento = data
 
-    print({qrDocumento})
+    print(qrDocumento)
 
     datosRegistros = Asistente.objects.get(documento = qrDocumento)
     
 
     return render(request, 'autoInfo.html', {
         'mostraDocumento' : qrDocumento,
-        'validoDocumento' : datosRegistros, 
+        'validoDocumento' : datosRegistros,
     })
 
 #  .\venv\Scripts\activate
