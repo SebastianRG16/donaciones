@@ -1,6 +1,7 @@
 from email import message
 from http.client import HTTPResponse
 from multiprocessing import AuthenticationError
+from urllib import response
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -13,6 +14,7 @@ import qrcode.image.svg
 from io import BytesIO
 import cv2
 import numpy as np
+from django.contrib import messages
 
 # from mainSistema.models import Asistente
 # Create your views here.
@@ -54,6 +56,7 @@ def salir(request):
 def preRegistro(request):
     datospreRegistro = Asistente.objects.all().values('idAsistente', 'nombres', 'apellidos', 'documento', 'telefono', 'correo')
     
+
     return render(request, 'preRegistro.html',{
        'mostrarpreRegistro' : datospreRegistro, 
     })
@@ -87,6 +90,9 @@ def save_tareas(request):
         )
         Asis.save()
 
+        
+
+
         return redirect("tareas")
     
     else:
@@ -114,9 +120,17 @@ def save_preRegistro(request):
             correo = correo,
         )
         Asis.save()
+    
+    try:
+        Asistente.objects.filter(documento = Asis.documento)
+        messages.warning(request, 'El asistente ya existe')
+    except:
+        messages.success(request, 'Se guardo correctamente')
 
 
-        context = {}
+
+
+    context = {}
     if request.method == "POST":
         factory = qrcode.image.svg.SvgImage
         img = qrcode.make(request.POST.get("documento",""), image_factory=factory, box_size=20)
@@ -125,6 +139,7 @@ def save_preRegistro(request):
         context["svg"] = stream.getvalue().decode()
 
     return render(request, "preRegistro.html", context=context)
+
 
 @login_required
 def leerqr(request):
