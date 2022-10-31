@@ -29,13 +29,15 @@
                   </ul>
                 </nav>
                 <h3 class="login-heading mb-4 text-center text-light fw-bold mb-2">HACER PRE REGISTRO</h3>
-                {% if messages %}
-                <ul class="messages">
-                  {% for message in messages %}
-                  <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                <div class="text-light">  
+                  {% if messages %}
+                  <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
                     {% endfor %}
-                </ul>
-                {% endif %}
+                  </ul>
+                  {% endif %}
+                </div>
                 <form>
                   <div class="form-floating mb-4">
                     <input type="text" class="form-control" id="nombre" placeholder="nombres" name="nombres">
