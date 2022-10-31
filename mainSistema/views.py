@@ -73,9 +73,6 @@ def save_tareas(request):
         tipo_aporte = request.POST["tipo_aporte"]
         tipo_persona = request.POST["tipo_persona"]
         
-
-
-
         Asis = Asistente(
 
             nombres = nombres,
@@ -89,6 +86,7 @@ def save_tareas(request):
 
         )
         Asis.save()
+        messages.success(request, 'Ingreso registrado de manera correcta.')
 
         return redirect("tareas")
     
@@ -105,11 +103,7 @@ def save_preRegistro(request):
         telefono = request.POST["telefono"]
         correo = request.POST["correo"]
         
-
-
-
         Asis = Preregistro(
-
             nombres = nombres,
             apellidos = apellidos,
             documento = documento,
@@ -117,18 +111,9 @@ def save_preRegistro(request):
             correo = correo,
         )
         Asis.save()
-        messages.success(request, 'Has sido registrado en el evento de manera correcta.')
+        messages.success(request, 'Has sido registrado en el evento de manera correcta.')        
 
-
-        context = {}
-    if request.method == "POST":
-        factory = qrcode.image.svg.SvgImage
-        img = qrcode.make(request.POST.get("documento",""), image_factory=factory, box_size=20)
-        stream = BytesIO()
-        img.save(stream)
-        context["svg"] = stream.getvalue().decode()
-
-    return render(request, "preRegistro.html", context=context)
+    return redirect("preRegistro")
 
 def qr_ingreso(request):
     context = {}
@@ -148,19 +133,13 @@ def qr_ingreso(request):
         return render(request, 'qrIngreso.html', context=context)
     except ObjectDoesNotExist:
         messages.warning(request, 'No estás registrado.')
-        return render(request, 'qrIngreso.html', context=context)
-    
-    
-    
-    
-    
-    
+        return render(request, 'qrIngreso.html', context=context)   
     
 
 @login_required
 def leerqr(request):
 
-    capture = cv2.VideoCapture(0)
+    capture = cv2.VideoCapture(1)
     while(capture.isOpened()):
         ret, frame = capture.read()
         if (cv2.waitKey(1) == ord('s')):
@@ -182,12 +161,13 @@ def leerqr(request):
 
     print({qrDocumento})
 
-    datosRegistros = Asistente.objects.get(documento = qrDocumento)
+    registro = Preregistro.objects.get(documento = int(qrDocumento))
+    messages.success(request, 'Ingreso de invitado ha sido guardado.')
     
 
     return render(request, 'autoInfo.html', {
         'mostraDocumento' : qrDocumento,
-        'validoDocumento' : datosRegistros, 
+        'registro' : registro, 
     })
 
 #  .\venv\Scripts\activate

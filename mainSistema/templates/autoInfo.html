@@ -35,29 +35,31 @@
             </nav>
             <h3 class="login-heading mb-4 text-center text-light fw-bold mb-2">REGISTRAR INFORMACION</h3>
             <form>
-              <div class="form-floating mb-3">
-                {% if mostraDocumento == validoDocumento.documento %}
+              <div class="form-floating mb-3">                
                 <input type="text" class="form-control" id="nombre" placeholder="nombres" name="nombres" required
-                value="{{validoDocumento.nombres}}">
-                <label for="floatingnombres">{{validoDocumento.nombres}}</label>
-                {% endif %}
+                value="{{registro.nombres}}">
+                <label for="floatingnombres">Nombres</label>                
               </div>
               <div class="form-floating mb-3">
-                  {% if  %}
-                  <input type="text" class="form-control" id="nombres" placeholder="apellidos" name="apellidos" required>
+                  
+                  <input type="text" class="form-control" id="nombres" placeholder="apellidos" name="apellidos" required
+                  value="{{registro.apellidos}}">
                   <label for="floatingapellidos">Apellidos</label>
-                  {% endif %}
+                  
               </div>
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="documento" placeholder="documento" name="documento" required>
+                <input type="text" class="form-control" id="documento" placeholder="documento" name="documento" required
+                value="{{registro.documento}}">
                 <label for="floatingdocumento">Cedula</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="contacto" placeholder="telefono" name="telefono" required>
+                <input type="text" class="form-control" id="contacto" placeholder="telefono" name="telefono" required
+                value="{{registro.telefono}}">
                 <label for="floatingtelefono">Contacto</label>
               </div>
               <div class="form-floating mb-4">
-                <input type="text" class="form-control" id="correo" placeholder="correo" name="correo" required>
+                <input type="text" class="form-control" id="correo" placeholder="correo" name="correo" required
+                value="{{registro.correo}}">
                 <label for="floatingcorreo">Correo electronico</label>
               </div>
               <div class="mb-4 col-12 col-md-12 col-lg-12 col-xl-12 ">

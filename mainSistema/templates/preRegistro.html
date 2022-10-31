@@ -13,16 +13,8 @@
 </head>
 
 
-<body>
-  {% if messages %}
-  <ul class="messages">
-    {% for message in messages %}
-      <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }} - {{ message.tags }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %}
-  <form action="{% url 'save_preRegistro' %}" method="POST">
-  {% csrf_token %}
+<body>  
+  
     <div class="container w-75 bg-white mt-5 rounded">
     <section class="vh-100 gradient-custom rounded shadow">
       <div class="container-fluid ps-md-0 rounded">
@@ -36,8 +28,16 @@
                     </li>
                   </ul>
               </nav>
+              {% if messages %}                
+                  {% for message in messages %}
+                      <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+                          {{ message }}
+                      </div>
+                  {% endfor %}                
+              {% endif %}
               <h3 class="login-heading mb-4 text-center text-light fw-bold mb-2">HACER PRE REGISTRO</h3>
-              <form>
+              <form action="{% url 'save_preRegistro' %}" method="POST">
+                {% csrf_token %}
                 <div class="form-floating mb-4">
                   <input type="text" class="form-control" id="nombre" placeholder="nombres" name="nombres">
                   <label for="floatingnombres">Nombres</label>
@@ -59,7 +59,7 @@
                   <label for="floatingcorreo">Correo electronico</label>
                 </div>
                 <div class="d-grid gap-2 col-6 mx-auto mb-5 ">
-                  <button type="sumbit" class="btn btn-success text-center">Generar codigo QR</button>
+                  <button type="sumbit" class="btn btn-success text-center">Guardar</button>
                 </div>
                 <div class="input-group mb-3">
                   <div style="margin: auto">
@@ -72,7 +72,7 @@
         </div>
       </div>
     </section>
-  </form>
+  
   </div>
   <style>
     .gradient-custom {
