@@ -39,31 +39,35 @@
                 {% if mostraDocumento == validoDocumento.documento %}
                 <input type="text" class="form-control" id="nombre" placeholder="nombres" name="nombres" required
                 value="{{validoDocumento.nombres}}">
-                <label for="floatingnombres">{{validoDocumento.nombres}}</label>
+                <label for="floatingnombres">Nombres</label>
                 {% endif %}
               </div>
               <div class="form-floating mb-3">
                 {% if mostraDocumento == validoDocumento.documento %}
-                  <input type="text" class="form-control" id="nombres" placeholder="apellidos" name="apellidos" required>
-                  <label for="floatingapellidos">{{validoDocumento.apellidos}}</label>
+                  <input type="text" class="form-control" id="nombres" placeholder="apellidos" name="apellidos" required
+                  value="{{validoDocumento.apellidos}}">
+                  <label for="floatingapellidos">Apellidos</label>
                   {% endif %}
               </div>
               <div class="form-floating mb-3">
                 {% if mostraDocumento == validoDocumento.documento %}
-                <input type="text" class="form-control" id="documento" placeholder="documento" name="documento" required>
-                <label for="floatingdocumento">{{validoDocumento.documento}}</label>
+                <input type="text" class="form-control" id="documento" placeholder="documento" name="documento" required
+                value="{{validoDocumento.documento}}">
+                <label for="floatingdocumento">Documento</label>
                 {% endif %}
               </div>
               <div class="form-floating mb-3">
                 {% if mostraDocumento == validoDocumento.documento %}
-                <input type="text" class="form-control" id="contacto" placeholder="telefono" name="telefono" required>
-                <label for="floatingtelefono">{{validoDocumento.telefono}}</label>
+                <input type="text" class="form-control" id="contacto" placeholder="telefono" name="telefono" required
+                value="{{validoDocumento.telefono}}">
+                <label for="floatingtelefono">Telefono</label>
                 {% endif %}
               </div>
               <div class="form-floating mb-4">
                 {% if mostraDocumento == validoDocumento.documento %}
-                <input type="text" class="form-control" id="correo" placeholder="correo" name="correo" required>
-                <label for="floatingcorreo">{{validoDocumento.correo}} </label>
+                <input type="text" class="form-control" id="correo" placeholder="correo" name="correo" required
+                value="{{validoDocumento.correo}}">
+                <label for="floatingcorreo">Correo </label>
                 {% endif %}
               </div>
               <div class="mb-4 col-12 col-md-12 col-lg-12 col-xl-12 ">
