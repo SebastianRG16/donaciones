@@ -43,22 +43,28 @@
                 {% endif %}
               </div>
               <div class="form-floating mb-3">
-                  {% if  %}
+                {% if mostraDocumento == validoDocumento.documento %}
                   <input type="text" class="form-control" id="nombres" placeholder="apellidos" name="apellidos" required>
-                  <label for="floatingapellidos">Apellidos</label>
+                  <label for="floatingapellidos">{{validoDocumento.apellidos}}</label>
                   {% endif %}
               </div>
               <div class="form-floating mb-3">
+                {% if mostraDocumento == validoDocumento.documento %}
                 <input type="text" class="form-control" id="documento" placeholder="documento" name="documento" required>
-                <label for="floatingdocumento">Cedula</label>
+                <label for="floatingdocumento">{{validoDocumento.documento}}</label>
+                {% endif %}
               </div>
               <div class="form-floating mb-3">
+                {% if mostraDocumento == validoDocumento.documento %}
                 <input type="text" class="form-control" id="contacto" placeholder="telefono" name="telefono" required>
-                <label for="floatingtelefono">Contacto</label>
+                <label for="floatingtelefono">{{validoDocumento.telefono}}</label>
+                {% endif %}
               </div>
               <div class="form-floating mb-4">
+                {% if mostraDocumento == validoDocumento.documento %}
                 <input type="text" class="form-control" id="correo" placeholder="correo" name="correo" required>
-                <label for="floatingcorreo">Correo electronico</label>
+                <label for="floatingcorreo">{{validoDocumento.correo}} </label>
+                {% endif %}
               </div>
               <div class="mb-4 col-12 col-md-12 col-lg-12 col-xl-12 ">
                 <div class="row align-items-center">
