@@ -121,6 +121,7 @@ def save_preRegistro(request):
         )
 
 
+    context = {}
 
     try:
         guardar = Asis.documento
@@ -129,15 +130,15 @@ def save_preRegistro(request):
         messages.warning(request, 'El asistente ya existe')
     except:
         messages.success(request, 'Se guardo correctamente')
+        Asis.save()
 
-
-    context = {}
-    if request.method == "POST":
-        factory = qrcode.image.svg.SvgImage
-        img = qrcode.make(request.POST.get("documento",""), image_factory=factory, box_size=20)
-        stream = BytesIO()
-        img.save(stream)
-        context["svg"] = stream.getvalue().decode()
+        
+        if request.method == "POST":
+            factory = qrcode.image.svg.SvgImage
+            img = qrcode.make(request.POST.get("documento",""), image_factory=factory, box_size=20)
+            stream = BytesIO()
+            img.save(stream)
+            context["svg"] = stream.getvalue().decode()
 
     return render(request, "preRegistro.html", context=context)
 
@@ -169,6 +170,7 @@ def leerqr(request):
 
     datosRegistros = Asistente.objects.get(documento = qrDocumento)
     
+    print(datosRegistros)
 
     return render(request, 'autoInfo.html', {
         'mostraDocumento' : qrDocumento,
