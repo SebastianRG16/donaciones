@@ -15,15 +15,15 @@
 
 
 <body>
-<form action="{% url 'save' %}" method="POST">
-{% csrf_token %}
+
+
   <div class="container w-75 bg-white mt-5 rounded">
   <section class="vh-100 gradient-custom rounded shadow">
     <div class="container-fluid ps-md-0 rounded">
       <div class="login d-flex align-items-center ">
         <div class="container col-12 col-md-6 col-lg-6 col-xl-6 col-auto mx-auto">
           <div class=" mx-auto py-2">
-            <nav class="navbar fixed-top justify-content-end" style="background-color: #343531">
+            <nav class="navbar fixed-top justify-content-end mb-2" style="background-color: #343531">
                 <ul class="nav justify-content-end">
                   <li class="nav-item">
                     <a class="nav-link text-light" href="{% url 'leerqr' %}">Leer codigo QR</a>
@@ -36,8 +36,17 @@
                   </li>
                 </ul>
             </nav>
-            <h3 class="login-heading mb-4 text-center text-light fw-bold mb-2">REGISTRAR INFORMACION</h3>
-            <form>
+            {% if messages %}                
+                {% for message in messages %}
+                    <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+                        {{ message }}
+                    </div>
+                {% endfor %}                
+            {% endif %}
+            
+            <h3 class="login-heading mb-4 text-center text-light fw-bold mt-5 mb-2">REGISTRAR INFORMACION</h3>
+            <form action="{% url 'save' %}" method="POST">
+              {% csrf_token %}
               <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="nombre" placeholder="nombres" name="nombres" required>
                 <label for="floatingnombres">Nombres</label>
@@ -102,7 +111,7 @@
       </div>
     </div>
   </section>
-</form>
+
 </div>
 <style>
   .gradient-custom {
