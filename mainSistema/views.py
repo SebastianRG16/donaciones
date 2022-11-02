@@ -19,6 +19,7 @@ from django.contrib import messages
 # from mainSistema.models import Asistente
 # Create your views here.
 
+
 def ingresar(request):
     if request.method == 'GET':
         return render(request, 'ingresar.html', {
@@ -30,22 +31,26 @@ def ingresar(request):
         if user is None:
             return render(request, 'ingresar.html', {
             'form': AuthenticationForm,
-            'error':'el usuario o la contraseña son incorrectos'
+            'error': 'el usuario o la contraseña son incorrectos'
         })
         else:
             login(request, user)
             return redirect('tareas')
 
+
 @login_required
 def tareas(request):
     return render(request, 'tareas.html')
 
+
 @login_required
 def registro(request):
-    datosRegistros = Asistente.objects.all().values('idAsistente', 'nombres', 'apellidos', 'documento', 'telefono', 'correo', 'tipo_aporte', 'tipo_persona')
-    return render(request,"registro.html",{   
-        'mostrarRegistros' : datosRegistros,
+    datosRegistros = Asistente.objects.all().values('idAsistente', 'nombres',
+                                           'apellidos', 'documento', 'telefono', 'correo', 'tipo_aporte', 'tipo_persona')
+    return render(request, "registro.html", {
+        'mostrarRegistros': datosRegistros,
 })
+
 
 @login_required
 def salir(request):
@@ -54,16 +59,17 @@ def salir(request):
 
 
 def preRegistro(request):
-    datospreRegistro = Asistente.objects.all().values('idAsistente', 'nombres', 'apellidos', 'documento', 'telefono', 'correo')
-    
+    datospreRegistro = Asistente.objects.all().values(
+        'idAsistente', 'nombres', 'apellidos', 'documento', 'telefono', 'correo')
 
-    return render(request, 'preRegistro.html',{
-       'mostrarpreRegistro' : datospreRegistro, 
+    return render(request, 'preRegistro.html', {
+       'mostrarpreRegistro': datospreRegistro,
     })
+
 
 @login_required
 def save_tareas(request):
-    
+
     if request.method == 'POST':
         nombres = request.POST["nombres"]
         apellidos = request.POST["apellidos"]
@@ -72,19 +78,16 @@ def save_tareas(request):
         correo = request.POST["correo"]
         tipo_aporte = request.POST["tipo_aporte"]
         tipo_persona = request.POST["tipo_persona"]
-        
-
-
 
         Asis = Asistente(
 
-            nombres = nombres,
-            apellidos = apellidos,
-            documento = documento,
-            telefono = telefono,
-            correo = correo,
-            tipo_aporte = tipo_aporte,
-            tipo_persona = tipo_persona
+            nombres=nombres,
+            apellidos=apellidos,
+            documento=documento,
+            telefono=telefono,
+            correo=correo,
+            tipo_aporte=tipo_aporte,
+            tipo_persona=tipo_persona
 
 
         )
@@ -94,7 +97,7 @@ def save_tareas(request):
 
 
         return redirect("tareas")
-    
+
     else:
         return redirect("registro")
 
@@ -107,40 +110,50 @@ def save_preRegistro(request):
         documento = request.POST["documento"]
         telefono = request.POST["telefono"]
         correo = request.POST["correo"]
-        
-
-
 
         Asis = Preregistro(
-
-            nombres = nombres,
-            apellidos = apellidos,
-            documento = documento,
-            telefono = telefono,
-            correo = correo,
+            nombres=nombres,
+            apellidos=apellidos,
+            documento=documento,
+            telefono=telefono,
+            correo=correo,
         )
-
 
     context = {}
 
     try:
         guardar = Asis.documento
-        datosRegistros = Asistente.objects.get(documento = guardar)
+        datosRegistros = Asistente.objects.get(documento=guardar)
         print(datosRegistros.documento)
         messages.warning(request, 'El asistente ya existe')
     except:
         messages.success(request, 'Se guardo correctamente')
         Asis.save()
+        messages.success(
+            request, 'Has sido registrado en el evento de manera correcta.')
+    return redirect("preRegistro")
 
-        
+
+    context = {}
+
+    try:
+
         if request.method == "POST":
+            documento = request.POST["documento"]
+            preRegistro = Preregistro.objects.get(documento=documento)
+
             factory = qrcode.image.svg.SvgImage
-            img = qrcode.make(request.POST.get("documento",""), image_factory=factory, box_size=20)
+            img = qrcode.make(request.POST.get("documento", ""),
+                              image_factory=factory, box_size=20)
             stream = BytesIO()
             img.save(stream)
             context["svg"] = stream.getvalue().decode()
 
-    return render(request, "preRegistro.html", context=context)
+        return render(request, 'qrIngreso.html', context=context)
+    except ObjectDoesNotExist:
+        messages.warning(request, 'No estás registrado.')
+        return render(request, 'qrIngreso.html', context=context)   
+    
 
 
 @login_required
@@ -166,7 +179,7 @@ def leerqr(request):
 
     qrDocumento = data
 
-    print(qrDocumento)
+    print({qrDocumento})
 
     datosRegistros = Asistente.objects.get(documento = qrDocumento)
     
