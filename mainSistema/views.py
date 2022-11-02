@@ -161,7 +161,7 @@ def qr_ingreso(request):
 @login_required
 def leerqr(request):
 
-    capture = cv2.VideoCapture(1)
+    capture = cv2.VideoCapture(0)
     while(capture.isOpened()):
         ret, frame = capture.read()
         if (cv2.waitKey(1) == ord('s')):
