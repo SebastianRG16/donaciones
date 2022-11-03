@@ -92,8 +92,6 @@ def save_tareas(request):
             correo=correo,
             tipo_aporte=tipo_aporte,
             tipo_persona=tipo_persona
-
-
         )
         Asis.save()
         messages.success(request, 'Ingreso registrado de manera correcta.')
@@ -183,7 +181,7 @@ def leerqr(request):
 
     print(qrDocumento)
 
-    registro = Preregistro.objects.get(documento = int(qrDocumento))
+    registro = Preregistro.objects.get(documento = qrDocumento)
     messages.success(request, 'Ingreso de invitado ha sido guardado.')
     
 
@@ -194,8 +192,35 @@ def leerqr(request):
 
 @login_required
 def Resumen(request):
+    totalRegistrados = Asistente.objects.all().values('idAsistente')
+    i=0
+    for total1 in totalRegistrados:
+        i=i+1
+    finalRegistrados = i
 
-    return render(request, 'Resumen.html')
+    totaltpersona = Asistente.objects.all().values('tipo_persona')
+    
+    j=0
+    k=0
+
+    for total2 in totaltpersona:
+        print(total2) 
+        
+        if total2 == {'tipo_persona': 'Asistente'}:
+            j=j+1
+            print(j)
+        elif total2 == {'tipo_persona': 'Invitado especial'}:
+            k=k+1
+            print(k)
+
+    totalAsistentes = j
+    totalInvitadoespecial = k
+
+    return render(request, 'Resumen.html',{
+        'registrados' : finalRegistrados, 
+        'asistentes' : totalAsistentes,
+        'Invitadoespecial' : totalInvitadoespecial,
+    })
 
 
 #  .\venv\Scripts\activate

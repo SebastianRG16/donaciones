@@ -28,28 +28,19 @@
                   </li>
                 </ul>
             </nav>
-            <h3 class="login-heading mb-4 text-center text-light fw-bold mb-2">RESUMEN</h3>
-            <div class="table-responsive">
-              
-              <table class="table table-light table-hover">
-                <thead>
-                  <tr class="text-center">
-                    <th scope="col">Total registrados</th>
-                    <th scope="col">Invitado Especial</th>
-                    <th scope="col">Asistente</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for Asistente in mostrarRegistros %}
-                  <tr>
-                    <td>{{Asistente.idAsistente}}</td>
-                    <td>{{Asistente.nombres}}</td>
-                    <td>{{Asistente.apellidos}}</td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
+            <h3 class="login-heading mb-4 text-center text-light fw-bold mb-5 py-3">RESUMEN</h3>
+            <div class="mb-5 py-4 text-light text-center">
+              <h2 class="fw-bold">Total registrados</h2>
+              <h1 class="fw-bold">{{registrados}}</h1>
+            </div>  
+            <div class="mb-5 py-4 text-light text-center">
+              <h2 class="fw-bold">Invitados Especiales</h2>
+              <h1 class="fw-bold">{{asistentes}}</h1>
+            </div>  
+            <div class="mb-5 py-4 text-light text-center">
+              <h2 class="fw-bold">Asistentes</h2>
+              <h1 class="fw-bold">{{Invitadoespecial}}</h1>
+            </div>  
           </div>
         </div>
       </div>
