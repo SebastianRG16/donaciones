@@ -192,6 +192,12 @@ def leerqr(request):
         'registro' : registro, 
     })
 
+@login_required
+def Resumen(request):
+
+    return render(request, 'Resumen.html')
+
+
 #  .\venv\Scripts\activate
 
 # python -m venv venv

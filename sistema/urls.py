@@ -28,6 +28,7 @@ urlpatterns = [
     path('', views.preRegistro, name="preRegistro"),
     path('save_preRegistro/', views.save_preRegistro, name="save_preRegistro"),
     path('leerqr/', views.leerqr, name="leerqr"),
-    path('checkin/', views.qr_ingreso, name='checkin')
+    path('checkin/', views.qr_ingreso, name='checkin'),
+    path('Resumen/', views.Resumen, name='Resumen'),
    
 ]
