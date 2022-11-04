@@ -93,8 +93,18 @@ def save_tareas(request):
             tipo_aporte=tipo_aporte,
             tipo_persona=tipo_persona
         )
-        Asis.save()
-        messages.success(request, 'Ingreso registrado de manera correcta.')
+
+
+        try:
+            guarda = Asis.documento
+            datosRegistros = Asistente.objects.get(documento=guarda)
+            print(datosRegistros.documento)
+            messages.warning(request, 'El asistente ya existe')
+        except:
+            Asis.save()
+            messages.success(
+            request, 'Has sido registrado en el evento de manera correcta.')
+            messages.success(request, 'Ingreso registrado de manera correcta.')
 
         return redirect("tareas")
 
@@ -159,7 +169,7 @@ def qr_ingreso(request):
 @login_required
 def leerqr(request):
 
-    capture = cv2.VideoCapture(0)
+    capture = cv2.VideoCapture(1)
     while(capture.isOpened()):
         ret, frame = capture.read()
         if (cv2.waitKey(1) == ord('s')):
