@@ -158,8 +158,20 @@ def qr_ingreso(request):
 
 @login_required
 def leerqr(request):
+    x_form_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_form_for is not None:
+        ip = x_form_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    
+    print(f"ip= {ip}")
+    
+    if ip == '192.168.1.100':
+        n = 1
+    elif ip == '192.168.1.103':
+        n = 2
 
-    capture = cv2.VideoCapture(0)
+    capture = cv2.VideoCapture(n)
     while(capture.isOpened()):
         ret, frame = capture.read()
         if (cv2.waitKey(1) == ord('s')):
