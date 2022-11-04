@@ -96,15 +96,14 @@ def save_tareas(request):
 
 
         try:
-            guarda = Asis.documento
-            datosRegistros = Asistente.objects.get(documento=guarda)
-            print(datosRegistros.documento)
+            doc = Asis.documento
+            print(f'documento= {doc}')
+            datosRegistros = Asistente.objects.get(documento=doc)
+            print(datosRegistros)
             messages.warning(request, 'El asistente ya existe')
             return redirect("tareas")
         except:
             Asis.save()
-            messages.success(
-            request, 'Has sido registrado en el evento de manera correcta.')
             messages.success(request, 'Ingreso registrado de manera correcta.')
             return redirect("tareas")
 
