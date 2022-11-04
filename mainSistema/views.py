@@ -93,10 +93,22 @@ def save_tareas(request):
             tipo_aporte=tipo_aporte,
             tipo_persona=tipo_persona
         )
-        Asis.save()
-        messages.success(request, 'Ingreso registrado de manera correcta.')
 
-        return redirect("tareas")
+
+        try:
+            guarda = Asis.documento
+            datosRegistros = Asistente.objects.get(documento=guarda)
+            print(datosRegistros.documento)
+            messages.warning(request, 'El asistente ya existe')
+            return redirect("tareas")
+        except:
+            Asis.save()
+            messages.success(
+            request, 'Has sido registrado en el evento de manera correcta.')
+            messages.success(request, 'Ingreso registrado de manera correcta.')
+            return redirect("tareas")
+
+       
 
     else:
         return redirect("registro")
@@ -169,7 +181,9 @@ def leerqr(request):
     if ip == '192.168.1.100':
         n = 1
     elif ip == '192.168.1.103':
-        n = 2
+        n = 2        
+    elif ip == '127.0.0.1':
+        n = 0
 
     capture = cv2.VideoCapture(n)
     while(capture.isOpened()):
